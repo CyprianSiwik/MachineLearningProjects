@@ -1,6 +1,9 @@
 # Cyprian Siwik 12/11/24
 # Machine learning intro projects and uses with libraries and models
 
+# This is probably not optimal file structure, the comments are rather long and bulky but
+# I wanted to make sure I knew what every part of this file was doing
+
 # This code trains a sentiment analysis model on the IMDB movie reviews dataset
 # using a neural network with an embedding layer and an LSTM (Long Short-Term Memory)
 # layer. It first loads and preprocesses the data, padding the sequences to a uniform
@@ -79,7 +82,7 @@ model.summary()
 # validation , which gives reliable performance estimates but reduces the
 # amount of data available for training the model. Low validation split allows
 # for more data to be trained but validation results may wane or be noisy.
-history = model.fit(X_train, y_train, epochs=6, batch_size=64, validation_split=0.2)
+history = model.fit(X_train, y_train, epochs=6, batch_size=64, validation_split=0.4)
 
 #evaluate the model on the test data
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
