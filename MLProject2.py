@@ -1,5 +1,5 @@
 # 12/16/24
-# Machine learning project using Microsoft optical backbone performance datasets
+# Machine learning project using Microsoft optical backbone performance datasets as data
 # and using it to train a One-Class SVM model to display anomalies (-1 value points)
 
 import pandas as pd
