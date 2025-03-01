@@ -36,7 +36,7 @@ reverse_word_index = {value: key for key, value in word_index.items()} #reverse 
 decoded_review = " ".join([reverse_word_index.get(i - 3, "?") for i in X_train[0]]) #decode the first review by converting ints back into words
 print(f"Decoded review: {decoded_review}") #print the decoded review
 
-#pad sequences for unifrom input length
+#pad sequences for uniform input length
 maxlen = 500 #maximum review length
 X_train = pad_sequences(X_train, maxlen=maxlen, padding='post') #pad training sequences for uniform length
 X_test = pad_sequences(X_test, maxlen=maxlen, padding='post')   #pad test dequences for uniform length
@@ -82,7 +82,7 @@ model.summary()
 # validation , which gives reliable performance estimates but reduces the
 # amount of data available for training the model. Low validation split allows
 # for more data to be trained but validation results may wane or be noisy.
-history = model.fit(X_train, y_train, epochs=6, batch_size=64, validation_split=0.4)
+history = model.fit(X_train, y_train, epochs=3, batch_size=100, validation_split=0.4)
 
 #evaluate the model on the test data
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
