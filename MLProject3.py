@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, classification_report
 
 
 #Download stock data - ticker is the stock - can change the start and end date
-ticker = "AAPL"
+ticker = input("Provide the market title of the stock you wish to analyze:")
 df = yf.download(ticker, start="2022-01-01", end = "2024-01-01")
 
 #Feature Engineering
@@ -96,19 +96,41 @@ print(f"Model Accuracy: {accuracy:.2f}")
 print(classification_report(y_test, y_pred))
 
 #Feature Importance Plot
+plt.rcParams['toolbar'] = 'None'
 feature_importance = pd.Series(model.feature_importances_, index=features)
-plt.figure(figsize=(8,5))
+fig = plt.figure(figsize=(8,5))
 sns.barplot(x=feature_importance, y=feature_importance.index, palette='Blues', width=0.55, alpha=0.85)
-plt.grid(axis='x', linestyle='--', alpha=0.4)
-plt.gca().spines['top'].set_linewidth(1)  # Set top border thickness
-plt.gca().spines['bottom'].set_linewidth(1)  # Set bottom border thickness
-plt.gca().spines['left'].set_linewidth(1)  # Set left border thickness
-plt.gca().spines['right'].set_linewidth(1)  # Set right border thickness
+plt.grid(axis='x', linestyle='--', alpha=0.4, color = 'white')
+#plt.patch.set_facecolor("lightgrey")
+fig.patch.set_facecolor("black")
+fig.patch.set_alpha(0.78)
+
+#Spine thickness
+plt.gca().spines['top'].set_linewidth(0)  # Set top border thickness
+plt.gca().spines['bottom'].set_linewidth(2)  # Set bottom border thickness
+plt.gca().spines['left'].set_linewidth(2)  # Set left border thickness
+plt.gca().spines['right'].set_linewidth(0)  # Set right border thickness
+#Spine colors
+plt.gca().spines['top'].set_color("white")
+plt.gca().spines['bottom'].set_color("white")
+plt.gca().spines['left'].set_color("white")
+plt.gca().spines['right'].set_color("white")
+
+# Font settings
+font_title = {'fontsize': 16, 'fontname': 'Arial', 'color': 'white', 'alpha': 0.8}
+font_labels = {'fontsize': 14, 'fontname': 'Arial', 'color': 'white', 'alpha': 0.8}
+font_ticks = {'fontsize': 12, 'fontname': 'Arial', 'color': 'white', 'alpha': 0.8}
 
 #plt.gca().set_facecolor('lightgrey')
-plt.xlabel("Feature Importance")
-plt.ylabel("Features")
-plt.title("Random Forest Feature Importance for Stock Movement Prediction")
+plt.gca().set_facecolor((0,0,0,0.0))
+
+plt.xticks(**font_ticks)
+plt.yticks(**font_ticks)
+
+plt.xlabel("Feature Importance", **font_labels)
+plt.ylabel("Features", **font_labels)
+plt.title(f"Random Forest Feature Importance for {ticker} Stock Movement Prediction", **font_title)
+plt.rcParams['toolbar'] = 'None'
 plt.show()
 
 #Visualizing Predictions vs Actual Stock Prices
@@ -119,8 +141,3 @@ plt.plot(dates, y_pred, label="Predicted", color='red', linestyle='dashed')
 plt.legend()
 plt.title(f"{ticker} Stock Movement Prediction: Actual vs Predicted")
 plt.show()
-
-
-
-
-
